@@ -5,7 +5,7 @@ const gastosSchema = new Schema(
   {
     descripcion: { type: String, required: true },    
     importe: { type: Number, required: true },
-    fecha: { type: Date, required: false },
+    fecha: { type: Date, required: true },
     tipo: { type: String, required: true },
     
   },

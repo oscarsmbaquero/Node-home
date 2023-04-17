@@ -2,10 +2,10 @@ import { httpStatusCode } from "../../utils/httpStatusCode.js";
 import { Gastos } from "../models/GastoModel.js";
 import { ObjectId } from "mongodb";
 
-const getGastos = async (req, res, next) => {
+const getIngreso = async (req, res, next) => {
   console.log("Entro");
   try {
-    const gastos = await Gastos.find();
+    const ingresos = await Gastos.find();
     // .populate({ path: "materialIntervencion",select: "descripcion"})
     // .populate({path:'cliente', select :""})
     console.log(gastos, 12);
@@ -21,7 +21,7 @@ const getGastos = async (req, res, next) => {
   }
 };
 
-const gastosDetail = async (req, res, next) => {
+const ingresoDetail = async (req, res, next) => {
   try {
     const { id } = req.params;
     const gastos = await Gastos.findById(id);
@@ -40,7 +40,7 @@ const gastosDetail = async (req, res, next) => {
   }
 };
 
-const addGasto = async (req, res, next) => {
+const addIngreso = async (req, res, next) => {
   console.log("Entro");
   console.log(req.body, 46);
   try {
@@ -62,4 +62,4 @@ const addGasto = async (req, res, next) => {
   }
 };
 
-export { getGastos, gastosDetail, addGasto };
+export { getIngreso, ingresoDetail, addIngreso };
