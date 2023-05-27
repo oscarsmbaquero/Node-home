@@ -61,5 +61,22 @@ const addGasto = async (req, res, next) => {
     return next(error);
   }
 };
+const deleteGasto = async(req, res, next)=>{
+  console.log('Entro');
+  try {
+    const { id } = req.params;
+   
+    const gastoDelete = await Gastos.findByIdAndDelete(id);
 
-export { getGastos, gastosDetail, addGasto };
+    
+    return res.json({
+      status: 200,
+      message: httpStatusCode[200],
+      data: { gasto: gastoDelete },
+    });
+  } catch (error) {
+    return next(error);
+  }
+}
+
+export { getGastos, gastosDetail, addGasto, deleteGasto };
