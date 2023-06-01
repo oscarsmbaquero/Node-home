@@ -7,6 +7,7 @@ const gastosSchema = new Schema(
     importe: { type: Number, required: true },
     fecha: { type: Date, required: true },
     tipo: { type: String, required: true },
+    modoPago: { type: String, required: true },
     
   },
   {

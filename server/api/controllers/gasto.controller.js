@@ -40,16 +40,43 @@ const gastosDetail = async (req, res, next) => {
   }
 };
 
+// const addGasto = async (req, res, next) => {
+//   console.log("Entro");
+//   console.log(req.body, 46);
+//   try {
+//     const NewGasto = new Gastos({
+//       descripcion: req.body.descripcion,
+//       importe: req.body.importe,
+//       fecha: req.body.fecha,
+//       tipo: req.body.tipo,
+      
+//     });
+//     const newGastoDB = await NewGasto.save();
+//     return res.json({
+//       status: 201,
+//       message: httpStatusCode[201],
+//       data: { gasto: newGastoDB },
+//     });
+//   } catch (error) {
+//     return next(error);
+//   }
+// };
 const addGasto = async (req, res, next) => {
   console.log("Entro");
   console.log(req.body, 46);
   try {
+    let fecha_gasto = req.body.fecha; // Inicialmente, la fecha de gasto es la que llega en el request
+    if (req.body.modoPago === "tarjeta") {
+      // Si el tipo de gasto es "tarjeta", se calcula la fecha del mes siguiente
+      const fechaActual = new Date(req.body.fecha);
+      fecha_gasto = new Date(fechaActual.getFullYear(), fechaActual.getMonth() + 1, 1);
+    }
     const NewGasto = new Gastos({
       descripcion: req.body.descripcion,
       importe: req.body.importe,
-      fecha: req.body.fecha,
+      fecha: fecha_gasto, // Se asigna la fecha determinada según el tipo de gasto
       tipo: req.body.tipo,
-      
+      modoPago: req.body.modoPago,
     });
     const newGastoDB = await NewGasto.save();
     return res.json({
